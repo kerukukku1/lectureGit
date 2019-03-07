@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8' />
+        <script src='https://cdn.jsdelivr.net/npm/vue'></script>
+    </head>
+    
+    <body>
+      <div id="app">
+        <h1>Component List 1</h1>
+        <local-component></local-component>
+        <global-component></global-component>
+      </div>
+      
+      <div id="app2">
+        <h1>Component List 2</h1>
+        <local-component></local-component>
+        <global-component></global-component>
+      </div>
+    </body>
+
+    <script>
+      var localComponent = {
+    	  template: '<p>local component</p>'
+      };
+      
+      Vue.component('global-component', {
+	      template: '<p>global component</p>'
+      });
+      
+      var vm = new Vue({
+        el: '#app',
+        components: {
+            'local-component': localComponent
+        }
+      });
+      var vm2 = new Vue({
+	      el: '#app2',
+      });
+    </script>
+</html>

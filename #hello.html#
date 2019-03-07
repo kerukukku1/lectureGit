@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8' />
+        <script src='https://cdn.jsdelivr.net/npm/vue'></script>
+        <style type='text/css'>
+          .error {
+                color: red;
+                border-bottom: 1px solid black;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    
+    <body>
+      <div id='app'>
+        <input v-model="name"></input>
+        <my-name :name="name"/>
+      </div>
+    </body>
+
+    <script>
+      Vue.filter('headNameUpper', function(name){
+        if(!name)return;
+        var ret = name.toString();
+        return ret.charAt(0).toUpperCase() + ret.slice(1);
+      });
+      Vue.component('my-name', {
+        props: {
+          name: String
+        },
+        template: `<span> Your name : {{ name | headNameUpper }} </span>`,
+        created() {
+          // alert('my-name component is created!');
+        }
+      });
+
+      var vm = new Vue({
+        el: '#app',
+        data : {
+          name : ''
+        },
+      });
+    </script>
+</html>
